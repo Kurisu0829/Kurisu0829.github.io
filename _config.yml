@@ -9,12 +9,12 @@ theme: jekyll-theme-chirpy
 lang: zh
 
 # Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
-timezone:
+timezone: Asia/Shanghai
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: Kurisu # the main title
 
 tagline: A text-focused Jekyll theme # it will display as the sub-title
 
@@ -26,7 +26,7 @@ description: >- # used by seo meta and the atom feed
 url: "https://kurisu0829.github.io"
 
 github:
-  username: github_username # change to your github username
+  username: Kurisu0829 # change to your github username
 
 twitter:
   username: twitter_username # change to your twitter username
