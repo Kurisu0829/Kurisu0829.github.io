@@ -1,22 +1,19 @@
-# Bundler cache
-.bundle
-vendor
-Gemfile.lock
-
-# Jekyll cache
-.jekyll-cache
-_site
-
-# RubyGems
-*.gem
-
-# NPM dependencies
+# Dependencies and caches
 node_modules
-package-lock.json
+.pnpm-store
+*.log
+.nuxt
+.output
+.data
+dist
+app/generated
+public/_content
+public/feed.xml
+public/sitemap.xml
+public/robots.txt
 
 # IDE configurations
 .idea
 
-# Misc
-assets/js/dist
-_posts/*实习*.md
+# Local-only posts
+posts/*实习*.md

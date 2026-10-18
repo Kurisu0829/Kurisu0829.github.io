@@ -1,0 +1,14 @@
+{
+  "title": "Kurisu",
+  "tagline": "Kurisu的个人博客",
+  "description": "记录生活、学习与日常想法。",
+  "url": "https://kurisu0829.github.io",
+  "language": "zh-CN",
+  "timezone": "Asia/Shanghai",
+  "author": "Kurisu",
+  "avatar": "/img/Head.jpg",
+  "github": "https://github.com/Kurisu0829",
+  "twitter": "https://twitter.com/MaKurisu0829",
+  "email": "Kurisu0829@qq.com",
+  "pageSize": 10
+}
