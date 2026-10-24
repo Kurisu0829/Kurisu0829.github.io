@@ -129,7 +129,7 @@ main:focus { outline: 0; }
 .about-stats strong { font-family: Georgia, serif; font-size: 25px; font-weight: 400; }
 .about-stats span { font-size: 11px; color: var(--muted); margin-top: 8px; }
 .search-form { display: flex; gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--accent); padding: 16px 20px; border-radius: 7px; }
-.search-form > span { font-size: 30px; color: var(--accent); line-height: 1; }
+.search-icon { display: block; width: 24px; height: 24px; flex-shrink: 0; color: var(--accent); }
 .search-form input { border: 0; background: transparent; width: 100%; min-width: 0; font-size: 14px; outline: none; }
 .search-form input::placeholder { color: var(--muted); }
 .search-form button { border: 0; color: var(--muted); flex-shrink: 0; font-size: 11px; }

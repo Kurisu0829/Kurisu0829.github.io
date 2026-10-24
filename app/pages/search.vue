@@ -43,7 +43,7 @@ onBeforeUnmount(() => clearTimeout(timer))
 </script>
 <template>
   <h1 class="sr-only">搜索</h1>
-  <form class="search-form" role="search" @submit.prevent><label for="article-search" class="sr-only">搜索文章</label><span aria-hidden="true">⌕</span><input id="article-search" v-model="query" type="search" placeholder="输入关键词，比如：房租、生活……" autocomplete="off"><button v-if="query" type="button" @click="query = ''">清除</button></form>
+  <form class="search-form" role="search" @submit.prevent><label for="article-search" class="sr-only">搜索文章</label><svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4 4" /></svg><input id="article-search" v-model="query" type="search" placeholder="输入关键词，比如：房租、生活……" autocomplete="off"><button v-if="query" type="button" @click="query = ''">清除</button></form>
   <div aria-live="polite">
     <p v-if="status === 'pending'" class="empty-state">正在准备搜索…</p>
     <div v-else-if="error" class="empty-state"><p>搜索数据暂时加载失败。</p><button class="text-button" @click="refresh()">重新加载</button></div>
