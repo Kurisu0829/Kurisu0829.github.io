@@ -49,7 +49,7 @@ async function share() {
       <div class="article-meta"><time :datetime="post.date">{{ formatDate(post.date) }}</time><span>{{ post.readingMinutes }} 分钟阅读</span><span>{{ post.words.toLocaleString('zh-CN') }} 字</span></div>
       <p v-if="post.updated" class="updated-date">更新于 {{ formatDate(post.updated) }}</p>
     </header>
-    <div class="article-body-grid">
+    <div class="article-body-grid" :class="{ 'article-body-grid-no-toc': !post.headings.length }">
       <article class="prose" aria-label="文章正文" v-html="post.html" />
       <aside v-if="post.headings.length" class="toc" aria-label="文章目录"><details open><summary>本篇目录</summary><nav><a v-for="heading in post.headings" :key="heading.id" :href="`#${heading.id}`" :class="{ 'toc-sub': heading.level === 3 }">{{ heading.text }}</a></nav></details></aside>
     </div>
