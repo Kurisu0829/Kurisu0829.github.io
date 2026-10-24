@@ -7,6 +7,7 @@ const navigation = [
   { path: '/', name: '文章', icon: '▤' },
   { path: '/archives/', name: '归档', icon: '◷' },
   { path: '/categories/', name: '分类', icon: '▦' },
+  { path: '/search/', name: '搜索', icon: '⌕' },
   { path: '/about/', name: '关于', icon: '○' },
 ]
 function active(path: string) {
@@ -26,7 +27,6 @@ function active(path: string) {
         <button class="menu-toggle" type="button" :aria-expanded="menuOpen" aria-controls="site-navigation" @click="menuOpen = !menuOpen">{{ menuOpen ? '收起' : '菜单' }}</button>
       </div>
       <div id="site-navigation" class="sidebar-body" :class="{ 'is-open': menuOpen }">
-        <NuxtLink to="/search/" class="search-link"><span>⌕</span> 搜索文章 <span class="search-hint">搜索</span></NuxtLink>
         <nav aria-label="主导航">
           <NuxtLink v-for="item in navigation" :key="item.path" :to="item.path" :class="['nav-link', { active: active(item.path) }]" :aria-current="active(item.path) ? 'page' : undefined">
             <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>{{ item.name }}<span v-if="item.path === '/'" class="nav-count">{{ posts.length }}</span>
