@@ -30,7 +30,12 @@
 * { box-sizing: border-box; }
 html, body, #__nuxt { height: 100%; overflow: clip; }
 * { scrollbar-width: thin; scrollbar-color: var(--muted) transparent; }
+/* Use custom scrollbar parts where supported so native arrow buttons stay hidden. */
+@supports selector(::-webkit-scrollbar) {
+  * { scrollbar-width: auto; scrollbar-color: auto; }
+}
 *::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
 *::-webkit-scrollbar-track { background: transparent; }
 *::-webkit-scrollbar-thumb { background: var(--muted); border: 2px solid transparent; background-clip: padding-box; border-radius: 999px; }
 *::-webkit-scrollbar-thumb:hover { background-color: var(--accent); }
@@ -110,6 +115,7 @@ main:focus { outline: 0; }
 .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); color: var(--muted); padding: 24px 0 28px; font-size: 10px; }
 .back-link { display: inline-block; color: var(--muted); font-size: 11px; margin-top: 32px; }
 .back-link:hover { color: var(--accent); }
+.category-back-link { margin-bottom: 24px; }
 .archive-year { margin: 12px 0 44px; }
 .archive-year h2 { font-family: Georgia, serif; font-size: 30px; font-weight: 400; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
 .archive-year h2 span { font-family: sans-serif; font-size: 11px; color: var(--muted); }
@@ -153,7 +159,7 @@ main:focus { outline: 0; }
 .article-header h1 { font-family: Georgia, 'Songti SC', SimSun, serif; font-size: clamp(28px, 3vw, 40px); font-weight: 500; line-height: 1.5; margin-bottom: 20px; overflow-wrap: anywhere; }
 .article-meta { display: flex; flex-wrap: wrap; gap: 20px; color: var(--muted); font-size: 11px; }
 .updated-date { font-size: 10px; color: var(--muted); margin: 12px 0 0; }
-.article-body-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 36px; padding-top: 32px; align-items: start; }
+.article-body-grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 36px; padding-top: 32px; align-items: start; }
 .article-body-grid-no-toc { grid-template-columns: minmax(0, 1fr); }
 .prose { font-size: 15px; line-height: 2; overflow-wrap: anywhere; min-width: 0; }
 .prose h1, .prose h2, .prose h3, .prose h4 { font-weight: 600; line-height: 1.6; color: var(--text); scroll-margin-top: 30px; }
