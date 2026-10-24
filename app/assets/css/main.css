@@ -184,7 +184,7 @@ main:focus { outline: 0; }
 .prose hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
 .prose ul, .prose ol { padding-left: 24px; }
 .prose li { margin: 6px 0; }
-.toc { position: sticky; top: 32px; border-left: 1px solid var(--line); padding-inline: 17px; text-align: center; max-height: calc(100dvh - 64px); overflow: auto; scrollbar-gutter: stable both-edges; }
+.toc { position: sticky; top: 32px; padding-inline: 17px; text-align: center; max-height: calc(100dvh - 64px); overflow: auto; scrollbar-gutter: stable both-edges; }
 .toc summary { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 15px; cursor: pointer; }
 .toc nav { display: flex; flex-direction: column; gap: 9px; }
 .toc a { color: var(--muted); font-size: 14px; line-height: 1.7; padding: 3px 0; }
