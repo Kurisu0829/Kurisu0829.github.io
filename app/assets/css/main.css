@@ -140,7 +140,7 @@ main:focus { outline: 0; }
 .search-result h2 a:hover { color: var(--accent); }
 .search-result p { color: var(--muted); font-size: 13px; line-height: 1.9; margin: 0; }
 .empty-state { text-align: center; padding: 60px 16px; color: var(--muted); font-size: 13px; }
-.article-header { border-bottom: 1px solid var(--line); padding: 35px 0 30px; }
+.article-header { padding: 35px 0 30px; }
 .article-categories { display: flex; gap: 12px; color: var(--accent); font-size: 11px; margin-bottom: 16px; }
 .article-header h1 { font-family: Georgia, 'Songti SC', SimSun, serif; font-size: clamp(28px, 3vw, 40px); font-weight: 500; line-height: 1.5; margin-bottom: 20px; overflow-wrap: anywhere; }
 .article-meta { display: flex; flex-wrap: wrap; gap: 20px; color: var(--muted); font-size: 11px; }
