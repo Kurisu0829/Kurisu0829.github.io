@@ -21,11 +21,11 @@ onMounted(() => {
   query.value = String(route.query.q || '')
   void refresh()
 })
-usePageSeo('搜索', '搜索博客中的文章标题、标签和正文。')
+usePageSeo('搜索', '搜索博客中的文章标题、分类和正文。')
 useSeoMeta({ robots: 'noindex, follow' })
 const terms = computed(() => query.value.trim().toLocaleLowerCase('zh-CN').split(/\s+/).filter(Boolean))
 const results = computed(() => !terms.value.length ? [] : entries.value.filter(entry => {
-  const haystack = `${entry.title} ${entry.tags.join(' ')} ${entry.text}`.toLocaleLowerCase('zh-CN')
+  const haystack = `${entry.title} ${entry.categories.join(' ')} ${entry.text}`.toLocaleLowerCase('zh-CN')
   return terms.value.every(term => haystack.includes(term))
 }).map(entry => {
   const index = entry.text.toLocaleLowerCase('zh-CN').indexOf(terms.value[0]!)
@@ -42,7 +42,7 @@ watch(() => route.query.q, value => { query.value = String(value || '') })
 onBeforeUnmount(() => clearTimeout(timer))
 </script>
 <template>
-  <header class="page-heading"><p class="eyebrow">FIND SOMETHING</p><h1>找回某一个片段<span class="accent">。</span></h1><p>搜索标题、标签和正文，多个关键词用空格分隔。</p></header>
+  <header class="page-heading"><p class="eyebrow">FIND SOMETHING</p><h1>找回某一个片段<span class="accent">。</span></h1><p>搜索标题、分类和正文，多个关键词用空格分隔。</p></header>
   <form class="search-form" role="search" @submit.prevent><label for="article-search" class="sr-only">搜索文章</label><span aria-hidden="true">⌕</span><input id="article-search" v-model="query" type="search" placeholder="输入关键词，比如：房租、生活……" autocomplete="off"><button v-if="query" type="button" @click="query = ''">清除</button></form>
   <div aria-live="polite">
     <p v-if="status === 'pending'" class="empty-state">正在准备搜索…</p>

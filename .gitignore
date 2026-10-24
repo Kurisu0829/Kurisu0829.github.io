@@ -15,5 +15,10 @@ public/robots.txt
 # IDE configurations
 .idea
 
+# Local Agent documentation
+AGENTS.md
+AGENTS.override.md
+/docs/agents/
+
 # Local-only posts
 posts/*实习*.md

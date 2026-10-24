@@ -64,7 +64,7 @@ export function readPost(source, filename, { now = new Date(), updated = null } 
   return {
     slug: legacySlug, path, title: String(data.title || match[2]), date,
     updated: data.last_modified_at ? parseDate(data.last_modified_at) : updated && updated > date ? updated : null,
-    categories: listOf(data.categories), tags: listOf(data.tags),
+    categories: listOf(data.categories),
     excerpt: textOf(String(data.description || data.excerpt || plainText)).slice(0, 120),
     readingMinutes: Math.max(1, Math.ceil(words / 350)), words, headings,
     html: md.renderer.render(tokens, md.options, {}), plainText,
@@ -94,21 +94,16 @@ export function buildContent(root = process.cwd(), { now = new Date() } = {}) {
     if (paths.has(post.path)) throw new Error(`重复的文章链接：${post.path}`)
     paths.add(post.path)
   }
-  const taxonomy = field => [...new Set(posts.flatMap(post => post[field]))].map(name => ({
-    name, slug: slugify(name), count: posts.filter(post => post[field].includes(name)).length,
+  const categories = [...new Set(posts.flatMap(post => post.categories))].map(name => ({
+    name, slug: slugify(name), count: posts.filter(post => post.categories.includes(name)).length,
   })).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'zh-CN'))
-  const categories = taxonomy('categories')
-  const tags = taxonomy('tags')
-  for (const group of [categories, tags]) {
-    if (new Set(group.map(item => item.slug)).size !== group.length || group.some(item => !item.slug)) {
-      throw new Error('分类或标签的 URL 重复或为空，请调整名称。')
-    }
+  if (new Set(categories.map(item => item.slug)).size !== categories.length || categories.some(item => !item.slug)) {
+    throw new Error('分类的 URL 重复或为空，请调整名称。')
   }
   const pageCount = Math.max(1, Math.ceil(posts.length / site.pageSize))
-  const routes = ['/', '/archives/', '/categories/', '/tags/', '/about/', '/search/',
+  const routes = ['/', '/archives/', '/categories/', '/about/', '/search/',
     ...Array.from({ length: pageCount - 1 }, (_, i) => `/page/${i + 2}/`),
-    ...posts.map(post => post.path), ...categories.map(item => `/categories/${item.slug}/`),
-    ...tags.map(item => `/tags/${item.slug}/`)]
+    ...posts.map(post => post.path), ...categories.map(item => `/categories/${item.slug}/`)]
   const contentDirectory = resolve(root, 'public/_content/posts')
   const serverContentDirectory = resolve(root, 'app/generated/posts')
   mkdirSync(contentDirectory, { recursive: true })
@@ -131,10 +126,10 @@ export function buildContent(root = process.cwd(), { now = new Date() } = {}) {
       if (file.endsWith('.json') && !generatedFiles.has(file)) unlinkSync(join(directory, file))
     }
   }
-  const index = { posts: summaries, categories, tags, pageCount, routes }
+  const index = { posts: summaries, categories, pageCount, routes }
   write(join(root, 'app/generated/content.json'), index)
   write(join(root, 'public/_content/search.json'), posts.map(post => ({
-    title: post.title, path: post.path, date: post.date, tags: post.tags, text: post.plainText,
+    title: post.title, path: post.path, date: post.date, categories: post.categories, text: post.plainText,
   })))
   const canonical = path => `${site.url.replace(/\/$/, '')}${path}`
   write(join(root, 'public/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.filter(path => path !== '/search/').map(path => `<url><loc>${escapeXml(canonical(path))}</loc></url>`).join('')}</urlset>`)

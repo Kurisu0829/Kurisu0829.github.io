@@ -6,7 +6,6 @@ export interface PostSummary {
   date: string
   updated: string | null
   categories: string[]
-  tags: string[]
   excerpt: string
   readingMinutes: number
   words: number
@@ -18,5 +17,5 @@ export interface Post extends Omit<PostSummary, 'contentFile'> {
   previous: { title: string; path: string } | null
   next: { title: string; path: string } | null
 }
-export interface Taxon { name: string; slug: string; count: number }
-export interface SearchEntry { title: string; path: string; date: string; tags: string[]; text: string }
+export interface Category { name: string; slug: string; count: number }
+export interface SearchEntry { title: string; path: string; date: string; categories: string[]; text: string }

@@ -1,1 +1,1 @@
-<template><TaxonomyIndex type="categories" /></template>
+<template><CategoryIndex /></template>

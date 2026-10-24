@@ -44,7 +44,7 @@ async function share() {
   <div v-if="post" class="article-page">
     <NuxtLink to="/" class="back-link">← 所有文章</NuxtLink>
     <header class="article-header">
-      <div class="article-categories"><NuxtLink v-for="category in post.categories" :key="category" :to="taxonomyPath('categories', category)">{{ category }}</NuxtLink></div>
+      <div class="article-categories"><NuxtLink v-for="category in post.categories" :key="category" :to="categoryPath(category)">{{ category }}</NuxtLink></div>
       <h1>{{ post.title }}</h1>
       <div class="article-meta"><time :datetime="post.date">{{ formatDate(post.date) }}</time><span>{{ post.readingMinutes }} 分钟阅读</span><span>{{ post.words.toLocaleString('zh-CN') }} 字</span></div>
       <p v-if="post.updated" class="updated-date">更新于 {{ formatDate(post.updated) }}</p>
@@ -53,7 +53,7 @@ async function share() {
       <article class="prose" aria-label="文章正文" v-html="post.html" />
       <aside v-if="post.headings.length" class="toc" aria-label="文章目录"><details open><summary>本篇目录</summary><nav><a v-for="heading in post.headings" :key="heading.id" :href="`#${heading.id}`" :class="{ 'toc-sub': heading.level === 3 }">{{ heading.text }}</a></nav></details></aside>
     </div>
-    <div class="article-end"><div class="tag-list"><NuxtLink v-for="tag in post.tags" :key="tag" :to="taxonomyPath('tags', tag)" class="tag"># {{ tag }}</NuxtLink></div><button type="button" class="text-button" @click="share">{{ copied ? '链接已复制 ✓' : copyFailed ? '请从地址栏复制链接' : '复制文章链接 ↗' }}</button><span class="sr-only" role="status">{{ copied ? '文章链接已复制' : copyFailed ? '复制失败，请从地址栏复制链接' : '' }}</span></div>
+    <div class="article-end"><button type="button" class="text-button" @click="share">{{ copied ? '链接已复制 ✓' : copyFailed ? '请从地址栏复制链接' : '复制文章链接 ↗' }}</button><span class="sr-only" role="status">{{ copied ? '文章链接已复制' : copyFailed ? '复制失败，请从地址栏复制链接' : '' }}</span></div>
     <nav class="article-pagination" aria-label="相邻文章"><NuxtLink v-if="post.previous" :to="post.previous.path"><small>← 上一篇</small><span>{{ post.previous.title }}</span></NuxtLink><span v-else /><NuxtLink v-if="post.next" :to="post.next.path"><small>下一篇 →</small><span>{{ post.next.title }}</span></NuxtLink></nav>
   </div>
 </template>

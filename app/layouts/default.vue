@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { site, posts, tags } = useBlog()
+const { site, posts, categories } = useBlog()
 const route = useRoute()
 const menuOpen = ref(false)
 watch(() => route.fullPath, () => { menuOpen.value = false })
@@ -7,7 +7,6 @@ const navigation = [
   { path: '/', name: '文章', icon: '▤' },
   { path: '/archives/', name: '归档', icon: '◷' },
   { path: '/categories/', name: '分类', icon: '▦' },
-  { path: '/tags/', name: '标签', icon: '＃' },
   { path: '/about/', name: '关于', icon: '○' },
 ]
 function active(path: string) {
@@ -43,7 +42,7 @@ function active(path: string) {
     <div class="main-shell">
       <header class="topbar"><span>{{ site.tagline }}</span><span class="topbar-right"><span class="status-dot" /> 持续记录中</span></header>
       <main id="main" tabindex="-1"><slot /></main>
-      <footer class="site-footer"><span>© {{ new Date().getFullYear() }} {{ site.author }}</span><span>{{ posts.length }} 篇记录 · {{ tags.length }} 个标签</span><a href="/sitemap.xml">站点地图 ↗</a></footer>
+      <footer class="site-footer"><span>© {{ new Date().getFullYear() }} {{ site.author }}</span><span>{{ posts.length }} 篇记录 · {{ categories.length }} 个分类</span><a href="/sitemap.xml">站点地图 ↗</a></footer>
     </div>
   </div>
 </template>

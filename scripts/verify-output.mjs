@@ -4,6 +4,12 @@ import { join, resolve } from 'node:path'
 
 const output = resolve('.output/public')
 const content = JSON.parse(readFileSync('app/generated/content.json', 'utf8'))
+assert.ok(!existsSync(join(output, 'tags')), '不应生成标签页面')
+assert.ok(!content.routes.some(route => route.startsWith('/tags/')), '不应包含标签路由')
+assert.equal(Object.hasOwn(content, 'tags'), false, '摘要索引不应包含标签')
+assert.doesNotMatch(readFileSync(join(output, 'sitemap.xml'), 'utf8'), /\/tags\//, '站点地图不应包含标签路由')
+const search = JSON.parse(readFileSync(join(output, '_content/search.json'), 'utf8'))
+assert.ok(search.every(entry => Array.isArray(entry.categories) && !Object.hasOwn(entry, 'tags')), '搜索索引应仅使用分类')
 for (const route of content.routes) {
   const file = join(output, route, 'index.html')
   assert.ok(existsSync(file), `没有生成页面：${route}`)
@@ -14,6 +20,7 @@ for (const route of content.routes) {
 for (const post of content.posts) {
   const html = readFileSync(join(output, post.path, 'index.html'), 'utf8')
   const data = JSON.parse(readFileSync(join(output, post.contentFile), 'utf8'))
+  assert.ok(!Object.hasOwn(post, 'tags') && !Object.hasOwn(data, 'tags'), `文章数据不应包含标签：${post.path}`)
   assert.ok(html.includes(post.title), `文章标题没有预渲染：${post.path}`)
   assert.ok(html.includes(data.html.slice(0, Math.min(data.html.length, 120))), `文章正文没有预渲染：${post.path}`)
   assert.ok(html.includes('application/ld+json'), `缺少文章结构化数据：${post.path}`)
@@ -35,6 +42,7 @@ function inspect(directory) {
         if (!href.startsWith('/') || href.startsWith('//')) continue
         const target = decodeURIComponent(href.split(/[?#]/)[0])
         if (!target) continue
+        assert.ok(!target.startsWith('/tags/'), `页面不应链接到标签：${path}`)
         assert.ok(existsSync(join(output, target)) || existsSync(join(output, target, 'index.html')),
           `内部链接或资源不存在：${href}（${path}）`)
         linkCount++
