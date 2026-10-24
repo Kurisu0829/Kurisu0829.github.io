@@ -32,7 +32,6 @@ function active(path: string) {
             <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>{{ item.name }}<span v-if="item.path === '/'" class="nav-count">{{ posts.length }}</span>
           </NuxtLink>
         </nav>
-        <div class="sidebar-note"><span class="eyebrow">A PERSONAL SPACE</span><p>记录那些值得<br>被记住的小事。</p></div>
         <div class="sidebar-bottom">
           <div class="social-links"><a :href="site.github" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/feed.xml">RSS ↗</a></div>
           <ThemeToggle />

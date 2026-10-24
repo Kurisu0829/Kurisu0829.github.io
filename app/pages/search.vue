@@ -42,7 +42,7 @@ watch(() => route.query.q, value => { query.value = String(value || '') })
 onBeforeUnmount(() => clearTimeout(timer))
 </script>
 <template>
-  <header class="page-heading"><p class="eyebrow">FIND SOMETHING</p><h1>找回某一个片段<span class="accent">。</span></h1><p>搜索标题、分类和正文，多个关键词用空格分隔。</p></header>
+  <h1 class="sr-only">搜索</h1>
   <form class="search-form" role="search" @submit.prevent><label for="article-search" class="sr-only">搜索文章</label><span aria-hidden="true">⌕</span><input id="article-search" v-model="query" type="search" placeholder="输入关键词，比如：房租、生活……" autocomplete="off"><button v-if="query" type="button" @click="query = ''">清除</button></form>
   <div aria-live="polite">
     <p v-if="status === 'pending'" class="empty-state">正在准备搜索…</p>

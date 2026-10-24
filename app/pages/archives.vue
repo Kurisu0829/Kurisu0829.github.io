@@ -12,6 +12,6 @@ const groups = computed(() => {
 })
 </script>
 <template>
-  <header class="page-heading"><p class="eyebrow">THE ARCHIVE</p><h1>时间留下的记录<span class="accent">。</span></h1><p>共 {{ posts.length }} 篇文章，沿着时间慢慢翻阅。</p></header>
+  <h1 class="sr-only">归档</h1>
   <section v-for="group in groups" :key="group.year" class="archive-year"><h2>{{ group.year }}<span>{{ group.posts.length }} 篇</span></h2><div class="timeline"><NuxtLink v-for="post in group.posts" :key="post.path" :to="post.path" class="timeline-entry"><time :datetime="post.date">{{ formatDate(post.date, true) }}</time><span>{{ post.title }}</span><span aria-hidden="true">↗</span></NuxtLink></div></section>
 </template>

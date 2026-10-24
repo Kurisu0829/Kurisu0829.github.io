@@ -8,6 +8,6 @@ usePageSeo(() => `${category.value?.name} · 分类`)
 </script>
 <template>
   <NuxtLink to="/categories/" class="back-link">← 所有分类</NuxtLink>
-  <header class="page-heading"><p class="eyebrow">CATEGORY</p><h1>{{ category?.name }}<span class="accent">。</span></h1><p>这里有 {{ entries.length }} 篇相关记录。</p></header>
+  <h1 class="sr-only">{{ category?.name }}</h1>
   <PostList :posts="entries" />
 </template>

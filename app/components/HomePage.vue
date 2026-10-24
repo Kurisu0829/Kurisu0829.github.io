@@ -6,10 +6,7 @@ usePageSeo(() => props.page === 1 ? '文章' : `文章 · 第 ${props.page} 页`
 </script>
 
 <template>
-  <section class="home-hero">
-    <div><p class="eyebrow">NOTES & EVERYDAY</p><h1>把日常，<br>慢慢写下来<span class="accent">。</span></h1><p class="hero-description">{{ site.description }}<br>一些生活的切片，也是一路走来的痕迹。</p></div>
-    <div class="hero-stamp" aria-hidden="true"><span>K.</span><small>KEEP A LITTLE<br>OF EVERY DAY</small></div>
-  </section>
+  <h1 class="sr-only">{{ page === 1 ? '文章' : `文章 · 第 ${page} 页` }}</h1>
   <section aria-labelledby="articles-title">
     <div class="section-heading"><h2 id="articles-title">{{ page === 1 ? '最近的记录' : `更早的记录 · 第 ${page} 页` }} <span>{{ posts.length }}</span></h2><NuxtLink to="/archives/">按时间浏览 ↗</NuxtLink></div>
     <div class="filter-row"><span class="filter-pill selected">全部文章</span><NuxtLink v-for="category in categories" :key="category.slug" :to="`/categories/${category.slug}/`" class="filter-pill">{{ category.name }} <span>{{ category.count }}</span></NuxtLink></div>
